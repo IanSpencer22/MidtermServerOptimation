@@ -8,7 +8,6 @@ from os import path
 import datetime
 
 src_dir = os.listdir(os.getcwd() + '\\data')
-print(src_dir)
 
 
 def is_Hidden(file):
@@ -31,6 +30,7 @@ for a in temp:
 del temp
 
 
+#Copies up Files that are in there directories and deletes them
 for a in src_dir:
     dir = os.getcwd() + '\\data\\' + a
     subDirs = os.listdir(dir)
@@ -38,8 +38,46 @@ for a in src_dir:
         for b in subDirs:
             subDir = dir + '\\' + b
             if os.path.isdir(subDir):
-                files = os.listdir(dir)
+                files = os.listdir(subDir)
                 for c in files:
                     file = subDir + '\\' + c
-                    shutil.copy2(file, dir)
-                os.remove(subDir)
+                    shutil.copy(file, dir)
+                    os.remove(file)
+                os.rmdir(subDir)
+
+
+#Renames and dates everything
+for a in src_dir:
+    dir = os.getcwd() + '\\data\\' + a
+    files = os.listdir(dir)
+    count = 0
+    for b in files:
+        count += 1
+    count += 1
+    usedNums = [0]
+    for b in files:
+        file = dir + '\\' + b
+        loop = True
+        attempt = 0
+        while(loop):
+            attempt = random.randrange(count)
+            loop = False
+            for d in usedNums:
+                if attempt == d:
+                    loop = True
+        usedNums.append(attempt)
+        if os.path.exists(a + '\\' + str(attempt) + b[-4:]){
+            
+        }
+        print('Original Name and Date')
+        print(b)
+        print(os.path.getctime('data\\' + a + '\\' + b))
+        print('\n')
+        creation_date = time.time() - random.randrange(864000)
+        os.utime('data\\' + a + '\\' + b, (creation_date, creation_date))
+        os.rename('data\\' + a + '\\' + b, 'data\\' + a + '\\' + str(attempt) + b[-4:])
+        print('New Name and Date')
+        print(str(attempt) + b[-4:])
+        print(creation_date)
+        print('\n')
+
