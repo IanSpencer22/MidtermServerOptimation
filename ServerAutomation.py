@@ -53,6 +53,7 @@ for a in src_dir:
     count = 0
     for b in files:
         count += 1
+        os.rename('data\\' + a + '\\' + b, 'data\\' + a + '\\' + 'temp' + b)
     count += 1
     usedNums = [0]
     for b in files:
@@ -66,16 +67,13 @@ for a in src_dir:
                 if attempt == d:
                     loop = True
         usedNums.append(attempt)
-        if os.path.exists(a + '\\' + str(attempt) + b[-4:]){
-            
-        }
         print('Original Name and Date')
         print(b)
-        print(os.path.getctime('data\\' + a + '\\' + b))
+        print(os.path.getctime('data\\' + a + '\\' + 'temp' + b))
         print('\n')
         creation_date = time.time() - random.randrange(864000)
-        os.utime('data\\' + a + '\\' + b, (creation_date, creation_date))
-        os.rename('data\\' + a + '\\' + b, 'data\\' + a + '\\' + str(attempt) + b[-4:])
+        os.utime('data\\' + a + '\\' + 'temp' + b, (creation_date, creation_date))
+        os.rename('data\\' + a + '\\' + 'temp' + b, 'data\\' + a + '\\' + str(attempt) + b[-4:])
         print('New Name and Date')
         print(str(attempt) + b[-4:])
         print(creation_date)
