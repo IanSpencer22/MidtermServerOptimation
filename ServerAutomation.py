@@ -1,3 +1,5 @@
+#Server Automation Midterm
+#Authors: Cooper Adcock, Ben Wirtz, Ian Spencer
 from operator import truediv
 import shutil
 import os
